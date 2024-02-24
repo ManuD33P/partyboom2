@@ -24,6 +24,25 @@ Iterator.prototype = {
     },
 }
 
+function IteratorGames(element){
+    this.element = element;
+    this.index = 0;
+}
+IteratorGames.prototype = {
+    hasNext: function(){
+        return this.index < this.element.length;
+    },
+    next: function(){
+         return this.element[this.index++];
+    },
+    rest: function(){
+        this.index = 0;
+    },
+    isRunning: function(){
+        return this.element[this.index].stateGame;
+    }
+}
+
 
 function formatMessage(text, player){
     return text
@@ -31,3 +50,4 @@ function formatMessage(text, player){
     .replace(/\+s/g, player.getScore())
     .replace(/\+l/g, player.getLife());
 }
+

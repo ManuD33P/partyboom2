@@ -74,6 +74,17 @@ Players.prototype = {
         // si el index del iterador es igual al tamaño de la lista de jugadores se resetea el iterador.
         this.iterator.reset();
     },
+    move: function(vroom){
+        for(var i = 0; i < this.players.length; i++){
+             user(this.players[i].name).vroom(vroom);
+        }
+    },
+    getWinner: function(){
+        var winner = this.players.find(function(player){
+            return player.getLife() > 0;
+        })
+        return winner;
+    }
 
 }
 
