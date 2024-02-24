@@ -41,7 +41,18 @@ Players.prototype = {
         if(this.isExist(name)) return false;
         var player = new Player(name);
         this.players.push(player);
-        return true;
+        return player;
+    },
+    remPlayer: function(name){
+      if(this.isExist(name)){
+        var findPlayer = null;
+        this.players = this.players.filter(function(player){
+            if(player.name === name) findPlayer = player;
+            return player.name !== name;
+        });
+
+        return  findPlayer ? findPlayer : null;
+      }  
     },
     addIterator: function(){
         this.iterator = new Iterator(this.players);
@@ -54,12 +65,16 @@ Players.prototype = {
         // se llama recursivamente a la funcion nextPlayer
         if(this.iterator.hasNext()){
             var player = this.iterator.next();
-            if(player.getLife() > 0) return player;
+            if(player.getLife() > 0) {
+                this.currentPlayer = player;
+                return player;
+            }
             return this.nextPlayer();
         }
         // si el index del iterador es igual al tamaño de la lista de jugadores se resetea el iterador.
         this.iterator.reset();
     },
+
 }
 
 

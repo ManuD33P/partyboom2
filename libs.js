@@ -23,3 +23,11 @@ Iterator.prototype = {
         this.index = 0;
     },
 }
+
+
+function formatMessage(text, player){
+    return text
+    .replace(/\+n/g, player.name)
+    .replace(/\+s/g, player.getScore())
+    .replace(/\+l/g, player.getLife());
+}
