@@ -20,4 +20,4 @@
 
 ## 🎖️ Créditos
 
-* Script desarrollado por ManuDeev
+* Script desarrollado por ManuD33P
