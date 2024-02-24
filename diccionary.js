@@ -33,5 +33,7 @@ Diccionary.prototype = {
     getSyllable: function(){
         return this.syllables[Math.floor(Math.random() * this.syllables.length)];
     },
-    
+
 }
+
+var diccionary = new Diccionary();
