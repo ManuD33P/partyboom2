@@ -88,6 +88,11 @@ PlayersInstance.prototype = {
         this.players.forEach(function(player){
             player.resetLife();
         })     
+    },
+    getWinner: function(){
+       return this.players.find( function(player){
+        return player.life
+       },this);
     }
 }
 

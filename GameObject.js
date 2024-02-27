@@ -1,15 +1,14 @@
 include('PlayersInstance.js');
 include('GameState.js');
-include('Diccionary.js');
 
-function Game(owner){
+function Game(owner,vroom){
     this.players = new PlayersInstance();
     this.currentPlayer = null;
     this.currentSyllable = null;
     this.stateInstance = false;
     this.timer = new Timer();
     this.owner = owner
-    this.vroom = null;
+    this.vroom = vroom;
     this.stateGame = new GameState(
         {
         players: this.players,

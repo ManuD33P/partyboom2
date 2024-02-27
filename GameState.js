@@ -26,10 +26,10 @@ GameState.prototype.evaluateInput = function(text,userobj){
             if(diccionary.hasWord(input)){
                 this.correctInput();
             } else {
-                this.incorrectInput();
+                this.incorrectInput(1);
             }
         } else {
-            this.incorrectInput(1);
+            this.incorrectInput(0);
         }
     }
 }
@@ -134,6 +134,7 @@ function advanceNextPlayer(game){
 function closeGame(game){
     game.players.moveAll(0);
     game.stateInstance = false;
+    game.currentPlayer = game.players.getWinner();
     print('Ganador del juego es: '+game.currentPlayer.name);
     game.currentPlayer.score++;
     game.players.resetPlayersLifes();

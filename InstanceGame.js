@@ -10,22 +10,20 @@ GamesInstance.prototype = {
     // agregar un nuevo juego.
     addGame : function(owner){
         if(!this.isOwnerExists(owner)){
-            var newGame = new Game(owner);
-
+            var vroom = this.games.length ? this.games.length + 1 : 1;
+            var newGame = new Game(owner,vroom);
             //asigna un vroom al juego
-            newGame.vroom = this.games.length ? this.games.length + 1 : 1;
             newGame.addPlayer(owner);
 
             this.games.push(newGame);
         
             //mensaje de aviso que se creo un nuevo juego.
 
-            print(owner+' ha creado una instancia de juego');
 
         } else {
 
             //mensaje si ya existe un juego con el mismo owner.
-            print('Ya tienes una instancia de juego creada.');
+            
         }
     },
     
