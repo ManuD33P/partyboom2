@@ -1,39 +1,35 @@
-include('archive.js');
+
 
 function Diccionary(){
-    this.syllables = [];
     this.words = null;
+    this.sylabbles = null;
 }
 
 
 Diccionary.prototype = {
-    loadDiccionary: function(){
-        var newDiccionary = loadDiccionary();
-        if(newDiccionary){
-            this.words = newDiccionary;
-            print('El Diccionario ha sido cargado con exito, total de palabras: ', this.words.size);
-            return true;
+    loadData : function(){
+        if(File.exists('diccionary.json')){
+            var data  = JSON.parse(File.load('diccionary.json'));
+            this.words = new Set(data);
+        } else {
+            print('Error el archivo diccionary.json no existe');
         }
-        print('Error al cargar el diccionario');
-        return false;
-    },
-    loadSylabble: function(){
-        var newSylabble = loadSylabble();
-        if(newSylabble){
-            this.syllables = newSylabble;
-            print('El Diccionario de silabas ha sido cargado con exito, total de silabas: ', this.syllables.length);
-            return true;
-        }
-        print('Error al cargar el diccionario de silabas');
-        return false;
-    },
-    isExists: function(word){
-        return this.words.has(word);
-    },
-    getSyllable: function(){
-        return this.syllables[Math.floor(Math.random() * this.syllables.length)];
-    },
 
+        if(File.exists('syllables.json')){
+            var data = JSON.parse(File.load('syllables.json'));
+            this.sylabbles = data;
+        } else {
+            print('Error el archivo syllables.json no existe.');
+        }
+    },
+    getSylabble : function(){
+            var numRandom = Math.floor(Math.random()* this.sylabbles.length);
+            return this.sylabbles[numRandom];
+    },
+    hasWord: function(word){
+        return this.words.has(word);
+    }
 }
 
 var diccionary = new Diccionary();
+diccionary.loadData();

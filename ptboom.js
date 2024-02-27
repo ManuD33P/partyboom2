@@ -1,3 +1,7 @@
+include('game.js');
+include('commands.js');
+include('handleInputs.js');
+include('diccionary.js');
 
 
 function onLoad(){

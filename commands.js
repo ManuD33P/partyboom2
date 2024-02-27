@@ -1,11 +1,22 @@
-include('game.js');
+include('instanceGame.js');
+
+var games = new GamesInstance();
+
+
 
 function onCommand(userobj,cmd,target,args){
     if(cmd === 'newGame'){
-        var game = games.addGame(userobj.name);
-        if(game){
-            var notify = new Notify(MSG_NEWGAME, 0);
-            notify.send(userobj);
-        }
+        games.addGame(userobj.name);
+    }
+    if(cmd.substr(0,9)==='joinGame '){
+      var arg = cmd.substr(9);
+      games.addPlayer(parseInt(arg),userobj.name);
+    }
+    if(cmd.substr(0,10)==='leaveGame '){
+        var arg = cmd.substr(10);
+        games.remPlayer(parseInt(arg),userobj.name);
+    }
+    if(cmd === 'startGame'){
+       games.startGame(userobj.name);
     }
 }
