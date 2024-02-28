@@ -1,7 +1,7 @@
 
 function Player(name){
     this.name = name;
-    this.life = 2;
+    this.life = 4;
     this.score = 0;
 }
 
@@ -26,7 +26,7 @@ Player.prototype = {
         return this.life;
     },
     resetLife: function(){
-        this.life = 2;
+        this.life = 4;
     }
 
 }
