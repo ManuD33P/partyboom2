@@ -1,5 +1,6 @@
 include('GameObject.js');
-
+include('Notify.js');
+include('Template.js');
 function GamesInstance(){
     this.games = [];
 }
@@ -18,7 +19,7 @@ GamesInstance.prototype = {
             this.games.push(newGame);
         
             //mensaje de aviso que se creo un nuevo juego.
-
+            print(MSG_NEWGAME.replace(/\+o/,owner).replace(/\+v/,vroom));
 
         } else {
 

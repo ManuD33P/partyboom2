@@ -1,8 +1,7 @@
 include('Commands.js')
 
-function onTextBefore(userobj, text){
+function onTextAfter(userobj, text){
     if(games.isRunningGames()){
         games.handleInputPlayers(text,userobj);
     }
-    return text;
 }

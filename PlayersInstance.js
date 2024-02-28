@@ -1,8 +1,9 @@
 include('PlayerObject.js');
 include('interatorPlayer.js');
-
+include('EffectSonic.js');
 function PlayersInstance(){
     this.players = [];
+    this.sonic = null;
 }
 
 
@@ -93,6 +94,9 @@ PlayersInstance.prototype = {
        return this.players.find( function(player){
         return player.life
        },this);
+    },
+    enableSound: function(){
+        this.sonic = new EffectSonic(this.players);
     }
 }
 

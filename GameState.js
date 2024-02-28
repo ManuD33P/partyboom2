@@ -1,5 +1,6 @@
 include('Diccionary.js');
-
+include('Notify.js');
+include('EffectSonic.js');
 // Función constructora para manejar los estados.
 function GameState(game) {
     this.game = game;
@@ -32,7 +33,7 @@ GameState.prototype.evaluateInput = function (text, userobj) {
 
 GameState.prototype.correctInput = function () {
     // Función cuando el usuario pone una respuesta correcta.
-    print('Bien, el siguiente.');
+    generationMessage(this.game, MSG_CORRECT_WORD)
     this.game.timer.stop();
     this.transitionTo(advanceNextPlayer);
     this.tick();
@@ -40,9 +41,14 @@ GameState.prototype.correctInput = function () {
 
 GameState.prototype.incorrectInput = function (arg = 0) {
     // Función cuando el usuario pone una respuesta incorrecta.
+
     return arg 
-        ? print('Mal esa palabra no existe en el diccionario' + this.game.currentPlayer.name) 
-        : print('Mal la palabra no contiene la sílaba: ' + this.game.currentSyllable);
+        ? 
+        //mensaje para cuando no existe en el diccionario
+        generationMessage(this.game,MSG_ERROR_WORD)
+        : 
+        //mensaje para cuando la palabra no incluye la silaba.
+        generationMessage(this.game,MSG_ERROR_NOSYL)
 };
 
 function StartingState() {}
@@ -55,7 +61,10 @@ StartingState.prototype = {
     execute: function (gameState) {
         var game = gameState.game;
         if (game) {
-            print('El juego comenzará en 5 segundos!');
+            //Mensaje para avisar que el juego comienza
+            generationMessage(game,MSG_STARTGAME)
+            game.players.enableSound();
+            //Mensaje para avisar que el juego comienza
             // Muevo todos los usuarios al vroom.
             game.players.moveAll(game.vroom);
         }
@@ -63,6 +72,7 @@ StartingState.prototype = {
         game.timer.interval = 5000; // 5 segundos
         game.timer.oncomplete = function () {
             // Obtengo una nueva sílaba
+            
             var newSyl = diccionary.getSylabble();
             game.currentSyllable = newSyl;
 
@@ -71,7 +81,11 @@ StartingState.prototype = {
             game.currentPlayer = firstPlayer;
 
             // Mensaje para el primer jugador
-            print("Rápido " + game.currentPlayer.name + " escribe una palabra con la sílaba " + game.currentSyllable);
+            
+            generationMessage(game,MSG_QUESTION);
+            game.players.sonic.sendEffect();
+            // Mensaje para el primer jugador
+
             gameState.transitionTo(ExpectState);
             gameState.tick();
         };
@@ -87,9 +101,13 @@ ExpectState.prototype = {
         game.timer.oncomplete = function () {
             // Lógica para reducirle una vida.
             game.currentPlayer.substracLife();
-            print(game.currentPlayer.name + ' Se te acabó el tiempo. Tienes una vida menos.');
-            print(" ");
-            print(" ");
+          // mensaje de que perdio una vida.
+            game.players.sonic.sendBomb();
+            generationMessage(game,MSG_SUBSTRACLIFE);
+            if(game.currentPlayer.life <= 0){
+                generationMessage(game,MSG_PLAYERLOSER);
+            }
+          // mensaje de que perdio una vida.
 
             // Transicionar al advanceNextPlayer.
             gameState.transitionTo(advanceNextPlayer);
@@ -117,8 +135,12 @@ advanceNextPlayer.prototype = {
         game.currentPlayer = nextPlayer;
 
         // Mensaje para el próximo jugador
-        print("Rápido " + game.currentPlayer.name + " escribe una palabra con la sílaba " + game.currentSyllable);
 
+        generationMessage(game,MSG_QUESTION);
+        
+        // Mensaje para el próximo jugador
+        
+        
         // Transicionar de nuevo a ExpectState
         gameState.transitionTo(ExpectState);
         gameState.tick();
@@ -132,9 +154,12 @@ closeGame.prototype = {
         game.players.moveAll(0);
         game.stateInstance = false;
         game.currentPlayer = game.players.getWinner();
-        print('Ganador del juego es: ' + game.currentPlayer.name);
         game.currentPlayer.score++;
         game.players.resetPlayersLifes();
+        // Mensaje de ganador
+        var vroom = 0;
+        generationMessage({currentPlayer: game.currentPlayer, vroom: 0},MSG_PLAYERWIN);
+        // Mensaje de ganador.
         game.currentPlayer = null;
     }
 };
