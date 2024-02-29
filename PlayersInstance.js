@@ -12,9 +12,7 @@ PlayersInstance.prototype = {
         if(!this.isExists(name)){
             var newPlayer = new Player(name);
             this.players.push(newPlayer);
-            print(newPlayer.name + ' se ah unido a la partida.');
         } else {
-                /* El usuario ya existe*/
             print(newPlayer.name+' Ya estas en el juego');
         }
         
@@ -97,6 +95,11 @@ PlayersInstance.prototype = {
     },
     enableSound: function(){
         this.sonic = new EffectSonic(this.players);
+    },
+    getScores: function(){
+        return this.players.forEach(function(player){
+            print(0,"\x0301\x06[\x0304"+player.name+"\x0301]:"+" \x0301"+player.score )
+        })
     }
 }
 

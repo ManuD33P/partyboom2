@@ -60,6 +60,7 @@ function closeGame() {}
 StartingState.prototype = {
     execute: function (gameState) {
         var game = gameState.game;
+        game.stateInstance=true;
         if (game) {
             //Mensaje para avisar que el juego comienza
             generationMessage(game,MSG_STARTGAME)
@@ -161,6 +162,9 @@ closeGame.prototype = {
         generationMessage({currentPlayer: game.currentPlayer, vroom: 0},MSG_PLAYERWIN);
         // Mensaje de ganador.
         game.currentPlayer = null;
+        print(0,'\x0301 X------------------- \x06\x0304[GAME TOP SCORE] \x06\x0301-------------------X ');
+        game.players.getScores();
+        print(0,'\x0301 X------------------- \x06\x0304       [GAME]      \x06\x0301-------------------X ')
     }
 };
 

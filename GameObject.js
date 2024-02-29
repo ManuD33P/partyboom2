@@ -16,7 +16,8 @@ function Game(owner,vroom){
         currentSyllable: this.currentSyllable,
         timer: this.timer,
         owner: this.owner,
-        vroom: this.vroom
+        vroom: this.vroom,
+        stateIntance: this.stateInstance
         }
     );  // Asegura que el contexto de 'game' es el correcto
 }
@@ -26,12 +27,10 @@ Game.prototype = {
     addPlayer: function(playerName){
         if(this.players.isExists(playerName)){
             //mensaje para avisar que el player ya existe en la instancia.
-            print(playerName+' Ya estabas en la instancia.');
         } else {
             // si no esta en la instancia.
             this.players.addPlayer(playerName);
             //avisar que se lo añado a la lista de players.
-            print(playerName+' se ha unido a la instancia de juego');
         }
     },
 
@@ -41,20 +40,25 @@ Game.prototype = {
             this.players.remPlayer(playerName);
 
             // avisar que ha sido eliminado de la instancia.
-            return print(playerName+' ha abandonado la instancia de juego');
             
         } else {
             //avisar que no esta en la instancia de juego.
-           return  print(playerName+' no estas en la instancia de este juego');
         }
     },
 
     startGame: function(){
-        this.stateInstance = true;
-        this.stateGame.transitionTo(StartingState);  // Aseguramos que el contexto sea el objeto 'game'
-        this.stateGame.tick();  // Ejecutamos el estado inicial
+        var players = this.players.players;
+
+        if(players.length > 1){
+            this.stateInstance = true;
+            this.stateGame.transitionTo(StartingState);  // Aseguramos que el contexto sea el objeto 'game'
+            this.stateGame.tick();  // Ejecutamos el estado inicial
+        } else {
+            print(MSG_PLAYERSINSUFFICIENT.replace(/\+n/g,this.owner));
+        }
 
     }
+
 
 
     //verifica si el usuario existe en la lista.

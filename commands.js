@@ -12,11 +12,16 @@ function onCommand(userobj,cmd,target,args){
       var arg = cmd.substr(9);
       games.addPlayer(parseInt(arg),userobj.name);
     }
-    if(cmd.substr(0,10)==='leaveGame '){
-        var arg = cmd.substr(10);
-        games.remPlayer(parseInt(arg),userobj.name);
+    if(cmd === 'leaveGame'){
+        games.remPlayer(userobj.name);
     }
     if(cmd === 'startGame'){
        games.startGame(userobj.name);
     }
+
+    if(cmd === 'stopGame'){
+        games.remGame(userobj.name);
+    }
+
+
 }

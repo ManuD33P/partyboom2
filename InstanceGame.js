@@ -39,27 +39,51 @@ GamesInstance.prototype = {
                 return game.owner === owner
             });
 
-             // cerrar el juego 
-           //findGame.closeGame();
+             //cierre del juego.
+             var instance = findGame.stateGame
+
+             instance.transitionTo(closeGame);
+             instance.tick();
 
            this.games = this.games.filter(function(game){
                 return game.owner !== owner
            })
+           
+           generationMessage({currentPlayer: {name:owner}, vroom:0},MSG_CLOSEDGAME);
 
-           print('La Instancia de juego de '+owner+' ha sido terminada');
         }
     },
     // agrega players
     addPlayer: function(vroom,name){
         var gameFind = this.findGame(vroom);
-            if(gameFind) gameFind.addPlayer(name);
+            if(gameFind){
+                
+                // fix corregir despues
+                var game = gameFind.stateGame.game;
+                if(game.stateInstance){
+                    generationMessage({currentPlayer:{name:name}},MSG_ERROR_ADDPLAYER,1);
+                } else {
+                    gameFind.addPlayer(name);
+                    generationMessage({currentPlayer:{name:name},vroom:0},MSG_JOINGAME);
+
+                }
+            } 
     },
     // elimina players
-    remPlayer : function(vroom,name){
-        var gameFind = this.findGame(vroom);
-        if(gameFind) gameFind.remPlayer(name);
+    remPlayer : function(name){
+        var gameFind = this.findInstancePlayerGame(name);
+        if(gameFind){
+            gameFind.remPlayer(name);
+            var game = gameFind.stateGame.game;
+            if(game.stateInstance){
+                generationMessage({currentPlayer:{name:name},vroom:game.vroom},MSG_LEAVEGAME);
+            } else {
+                generationMessage({currentPlayer:{name:name},vroom:0},MSG_LEAVEGAME);
+            }
+        } else {
+            generationMessage({currentPlayer:{name:name}},MSG_ERROR_PLAYERINSTANCE,1);
+        }
     },
-
     // busca instancia de juego por vroom
     findGame:function(vroom){
         return this.games.find(function(game){
@@ -85,15 +109,24 @@ GamesInstance.prototype = {
     },
     isRunningGames: function(){
         return this.games.some( function(game){
-            return game.stateInstance
+            var findGame = game.stateGame.game
+            return findGame.stateInstance
         },this);
     },
     handleInputPlayers: function(text,userobj){
         this.games.forEach(function(game){
-            if(game.stateInstance){
+            var findGame = game.stateGame.game
+            if(findGame.stateInstance){
                game.stateGame.evaluateInput(text,userobj)
             }
         })
+    },
+    findInstancePlayerGame: function(name){
+        var findGame = this.games.find(function(game){
+            return game.players.isExists(name);
+        });
+
+        return findGame;
     }
     
 }
