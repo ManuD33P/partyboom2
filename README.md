@@ -2,6 +2,9 @@
 
 * Juego popular en internet que consiste en obtener una sílaba y armar una palabra con ella.
 
+## Guía de Instalación
+ [Guía de Instalación del Script PartyBoom.js](https://github.com/ManuD33P/partyboom2.js/wiki/Guia-de-Instalaci%C3%B3n-del-Script-en-sb0t)
+ 
 ## 🚀 Compatibilidad
 
 * Este juego está hecho 100% con JavaScript emulado por el framework .NET JURASSIC
