@@ -39,5 +39,8 @@ function onCommand(userobj,cmd,target,args){
         games.remGame(userobj.name);
     }
 
+    if(cmd === 'listGames'){
+        games.listGames(userobj);
+    }
 
 }

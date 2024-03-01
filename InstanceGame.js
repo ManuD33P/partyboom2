@@ -136,6 +136,20 @@ GamesInstance.prototype = {
                     generationMessage({currentPlayer:{name:name}, vroom: 0}, MSG_ERROR_GAME_CLOSE);
                 }
             }
+    },
+    listGames:function(userobj){
+        print(userobj,"\x0304\x06 X-------------- \x0301Lista de Juegos \x0304--------------X")
+        print(userobj,"")
+        if(this.games.length){
+        this.games.forEach(function(game){
+                var estado = game.stateGame.game.stateInstance ? "\x0304\x06En curso" : "\x0304\x06Esperando Jugadores.";
+                print(userobj, "\x0301ID: \x0304\x06"+game.vroom+"    \x0301\x06Owner: \x0304\x06"+game.owner+"    \x06\x0301Cantidad de Players: \x0304\x06"+game.players.players.length+"\x0301\x06      Estado: "+estado);
+            })
+        } else {
+            print(userobj, "                La lista de Instancia de juegos esta vacia.");
+        }
+            print(userobj,"")
+            print(userobj,"\x0304\x06 X-------------- \x0301Lista de Juegos \x0304--------------X")
     }
     
 }
