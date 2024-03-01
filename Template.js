@@ -14,3 +14,4 @@ var MSG_PLAYERLOSER= "\x06\x0301[\x0304+n\x0301] has perdido todas tus vidas. Ha
 var MSG_PLAYERWIN = "\x06\x0301[\x0304+n\x0301] ha sido el ganador del juego. Su total de partidas ganadas: [\x0304+s\x0301]";
 var MSG_ERROR_ADDPLAYER = "\x06\x0301[\x0304+n\x0301] Debes esperar que termine el juego, para unirte a la instancia";
 var MSG_PLAYERSINSUFFICIENT = "\x06\x0301[\x0304+n\x0301] No tienes suficientes jugadores en la instancia";
+var MSG_GAME_CLOSED = "\x06\x0301[\x0304+n\x0301] Ha detenido el juego. esta ronda de juego queda invalidada."

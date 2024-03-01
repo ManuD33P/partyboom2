@@ -42,14 +42,13 @@ GamesInstance.prototype = {
              //cierre del juego.
              var instance = findGame.stateGame
 
-             instance.transitionTo(closeGame);
-             instance.tick();
+             instance.closeGame();
 
            this.games = this.games.filter(function(game){
                 return game.owner !== owner
            })
            
-           generationMessage({currentPlayer: {name:owner}, vroom:0},MSG_CLOSEDGAME);
+           generationMessage({currentPlayer: {name:owner}, vroom:0},MSG_CLOSED_INSTANCE);
 
         }
     },
@@ -127,6 +126,14 @@ GamesInstance.prototype = {
         });
 
         return findGame;
+    },
+    closeGame: function(name){
+            if(this.isOwnerExists(name)){
+                var findGame = this.findInstancePlayerGame(name);
+                if(findGame){
+                    findGame.stateGame.closeGame();
+                }
+            }
     }
     
 }

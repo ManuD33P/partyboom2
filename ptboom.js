@@ -19,6 +19,7 @@ function onHelp(userobj){
     print(userobj,'\x0304#leaveGame     ----> \x0301\x06Para salir de la Instancia de juego.');
     print(userobj,"\x0304#startGame --------> \x0301\x06Iniciar el juego.");
     print(userobj,"\x0304#stopGame  --------> \x0301\x06Detener el juego.");
+    print(userobj,"\x0304#closeGame  --------> \x0301\x06Cierra la instancia.")
     print(userobj,"");
     print(userobj,'\x0304\x06[X--------- Comandos PartyBoom2 ------ X]');
 }

@@ -32,6 +32,10 @@ function onCommand(userobj,cmd,target,args){
     }
 
     if(cmd === 'stopGame'){
+        games.closeGame(userobj.name)
+    }
+    
+    if(cmd === 'closeGame'){
         games.remGame(userobj.name);
     }
 
