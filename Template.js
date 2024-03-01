@@ -2,7 +2,7 @@
 var MSG_NEWGAME = "\x06\x0301 [\x0304+o\x0301] ha creado una una instancia de juego para unirse \x0304 #joinGame +v";
 var MSG_JOINGAME= "\x06\x0301[\x0304+n\x0301] se ha unido a la instancia juego";
 var MSG_LEAVEGAME= "\x06\x0301[\x0304+n\x0301] ha abandonado la instancia de juego";
-var MSG_CLOSEDGAME= "\x06\x0301[+n] ha cerrado la instancia del juego.";
+var MSG_CLOSED_INSTANCE= "\x06\x0301[+n] ha cerrado la instancia del juego.";
 var MSG_ERROR_PLAYERINSTANCE="\x06\x0301[+n] no estas en ninguna instancia";
 var MSG_STARTGAME = "\x06\x0301Se ha iniciado el juego. Comenzara en 5 segundos";
 var MSG_QUESTION = "\x06\x0301Responde rapido [\x0304+n\x0301] una palabra con esta silaba [\x0304+sy\x0301]";
@@ -15,3 +15,4 @@ var MSG_PLAYERWIN = "\x06\x0301[\x0304+n\x0301] ha sido el ganador del juego. Su
 var MSG_ERROR_ADDPLAYER = "\x06\x0301[\x0304+n\x0301] Debes esperar que termine el juego, para unirte a la instancia";
 var MSG_PLAYERSINSUFFICIENT = "\x06\x0301[\x0304+n\x0301] No tienes suficientes jugadores en la instancia";
 var MSG_GAME_CLOSED = "\x06\x0301[\x0304+n\x0301] Ha detenido el juego. esta ronda de juego queda invalidada."
+var MSG_ERROR_GAME_CLOSE="\x06\x0301[\x0304+n\x0301] El juego no esta en curso."

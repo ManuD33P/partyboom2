@@ -55,7 +55,6 @@ GameState.prototype.closeGame = function(){
     this.game.players.moveAll(0);
     this.game.stateInstance = false;
     this.game.timer.stop();
-    generationMessage({currentPlayer:{name:this.game.owner}, vroom: 0}, MSG_GAME_CLOSED)
 }
 
 

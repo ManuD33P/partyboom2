@@ -41,8 +41,7 @@ GamesInstance.prototype = {
 
              //cierre del juego.
              var instance = findGame.stateGame
-
-             instance.closeGame();
+            if(instance.stateInstance) instance.closeGame();
 
            this.games = this.games.filter(function(game){
                 return game.owner !== owner
@@ -130,8 +129,11 @@ GamesInstance.prototype = {
     closeGame: function(name){
             if(this.isOwnerExists(name)){
                 var findGame = this.findInstancePlayerGame(name);
-                if(findGame){
+                if(findGame.stateInstance){
                     findGame.stateGame.closeGame();
+                    generationMessage({currentPlayer:{name:name}, vroom: 0}, MSG_GAME_CLOSED)
+                } else {
+                    generationMessage({currentPlayer:{name:name}, vroom: 0}, MSG_ERROR_GAME_CLOSE);
                 }
             }
     }
