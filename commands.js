@@ -43,4 +43,15 @@ function onCommand(userobj,cmd,target,args){
         games.listGames(userobj);
     }
 
+    if(cmd === 'ownerHelp'){
+        print("#listPlayers ----> Lista de usuarios de la instancia de juego.");
+        print("#listBanGame ----> Lista de usuarios prohibido en la instancia de juego.");
+        print("#banGame +id -----> prohibe la entrada a un usuario a la instancia de juego.");
+        print("#unbanGame +id ----> desbanea a un usuario a la instancia de juego.")
+        print('#kickGame +id -----> kickea usuarios de la instancia de juego.');
+    }
+
+    if(cmd === 'listUser'){
+        games.listUser(userobj.name);
+    }
 }

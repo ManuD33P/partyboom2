@@ -150,6 +150,15 @@ GamesInstance.prototype = {
         }
             print(userobj,"")
             print(userobj,"\x0304\x06 X-------------- \x0301Lista de Juegos \x0304--------------X")
+    },
+    listUser : function(owner){
+        if(this.isOwnerExists(owner)){
+            var findGame = this.findInstancePlayerGame(owner);
+            
+            if(findGame){
+                findGame.players.listUsers();
+            }
+        }
     }
     
 }
